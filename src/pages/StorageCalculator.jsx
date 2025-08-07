@@ -9,7 +9,7 @@ import DatePicker from '../components/DatePicker'
 const EMPTY_REQUIRED_FIELD_STATE = { value: '', isValid: false, error: '' }
 
 const StorageCalculator = () => {
-  const [monthlyPriceState, setMonthlyPriceState] = useState(0)
+  const [monthlyPriceState, setMonthlyPriceState] = useState('')
   const [startDateState, setStartDateState] = useState(EMPTY_REQUIRED_FIELD_STATE)
   const [endDateState, setEndDateState] = useState(EMPTY_REQUIRED_FIELD_STATE)
   const [calculationResult, setCalculationResult] = useState({ show: false, header: '', text: '' })
@@ -19,7 +19,7 @@ const StorageCalculator = () => {
   }, [])
 
   const calculate = (evt) => {
-    if (!startDateState.value || !endDateState.value || monthlyPriceState === 0) {
+    if (!startDateState.value || !endDateState.value || !monthlyPriceState || monthlyPriceState === 0) {
       setCalculationResult({
         show: true,
         header: 'שגיאה',
@@ -54,8 +54,9 @@ const StorageCalculator = () => {
     const months = date2.diff(date1, 'months')
     const remainingDays = date2.diff(date1.clone().add(months, 'months'), 'days')
 
-    const totalPrice2 = (months * monthlyPriceState) + (remainingDays * monthlyPriceState / 30)
-    const totalPrice = Math.floor((months * monthlyPriceState) + (remainingDays * monthlyPriceState / 30))
+    const monthlyPrice = Number(monthlyPriceState)
+    const totalPrice2 = (months * monthlyPrice) + (remainingDays * monthlyPrice / 30)
+    const totalPrice = Math.floor((months * monthlyPrice) + (remainingDays * monthlyPrice / 30))
 
     let message = 'יואב הובלות ואחסנה\n'
     message += 'עלות אחסנה\n\n'
@@ -132,7 +133,7 @@ const StorageCalculator = () => {
               name="monthlyPrice"
               value={monthlyPriceState}
               onChange={e => {
-                setMonthlyPriceState(Number(e.target.value))
+                setMonthlyPriceState(e.target.value)
               }}
             />
           </div>
