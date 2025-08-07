@@ -3,9 +3,6 @@
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   line-height: 1.5;
   font-weight: 400;
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -19,9 +16,18 @@
   direction: rtl;
 }
 
-body {
+html, body {
+  height: 100%;
+  background-color: #ffffff;
+  color: #212529;
   direction: rtl;
   text-align: right;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Custom utilities */
@@ -38,12 +44,16 @@ body {
   background-color: #f8f9fa;
 }
 
-/* Dark mode adjustments */
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
+/* Ensure main content takes available space */
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.App main {
+  flex: 1;
+  background-color: #ffffff;
 }
 
 /* Custom component styles */
