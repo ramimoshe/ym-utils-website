@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import moment from 'moment'
 import HorizontalLine from '../components/HorizontalLine'
 import NotificationModal from '../components/NotificationModal'
+import ErrorModal from '../components/ErrorModal'
 import DatePicker from '../components/DatePicker'
 
 // Helper for empty required field state similar to your system
@@ -13,6 +14,7 @@ const StorageCalculator = () => {
   const [startDateState, setStartDateState] = useState(EMPTY_REQUIRED_FIELD_STATE)
   const [endDateState, setEndDateState] = useState(EMPTY_REQUIRED_FIELD_STATE)
   const [calculationResult, setCalculationResult] = useState({ show: false, header: '', text: '' })
+  const [errorState, setErrorState] = useState({ show: false, header: '', text: '' })
 
   useEffect(() => {
     // Any initialization logic can go here
@@ -20,7 +22,7 @@ const StorageCalculator = () => {
 
   const calculate = (evt) => {
     if (!startDateState.value || !endDateState.value || !monthlyPriceState || monthlyPriceState === 0) {
-      setCalculationResult({
+      setErrorState({
         show: true,
         header: 'שגיאה',
         text: 'אנא מלא את כל השדות הנדרשים'
@@ -33,7 +35,7 @@ const StorageCalculator = () => {
     const date2 = moment(endDateState.value, 'YYYY-MM-DD')
 
     if (!date1.isValid() || !date2.isValid()) {
-      setCalculationResult({
+      setErrorState({
         show: true,
         header: 'שגיאה',
         text: 'תאריכים לא תקינים'
@@ -42,7 +44,7 @@ const StorageCalculator = () => {
     }
 
     if (date2.isBefore(date1)) {
-      setCalculationResult({
+      setErrorState({
         show: true,
         header: 'שגיאה',
         text: 'תאריך הסיום חייב להיות אחרי תאריך ההתחלה'
@@ -82,6 +84,10 @@ const StorageCalculator = () => {
     setCalculationResult({ show: false, header: '', text: '' })
   }
 
+  const handleErrorClose = () => {
+    setErrorState({ show: false, header: '', text: '' })
+  }
+
   const handleStartDateChange = (e) => {
     setStartDateState({
       value: e.target.value,
@@ -101,6 +107,7 @@ const StorageCalculator = () => {
   return (
     <div className="container py-5">
       <NotificationModal state={calculationResult} onCloseClick={handlePostCalculate} />
+      <ErrorModal state={errorState} onCloseClick={handleErrorClose} />
       
       {/* Back to Home Button - Top */}
       <div className="row mb-4">
