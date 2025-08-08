@@ -117,69 +117,73 @@ const StorageCalculator = () => {
           </Link>
         </div>
       </div>
-      
-      {/* Title and Description */}
-      <div className="row gy-2 mt-3">
-        <h4>מחשבון אחסנה</h4>
-        <p>שיטת החישוב הינה מחיר חודשי כפול מספר חודשי השכירות + הימים הנותרים כפול מחיר יומי (מחיר יומי = מחיר חודשי חלקי 30)</p>
-      </div>
 
-      <HorizontalLine />
-
-      {/* Form Fields */}
-      <div className="row gy-2 mt-3">
-        <div className="col-xxl-3 col-lg-4 col-md-6">
-          <div>
-            <label htmlFor="priceInput" className="form-label">מחיר חודשי</label>
-            <input 
-              type="number" 
-              min="0" 
-              max="3000" 
-              className="form-control" 
-              id="priceInput" 
-              name="monthlyPrice"
-              value={monthlyPriceState}
-              onChange={e => {
-                setMonthlyPriceState(e.target.value)
-              }}
-            />
+      <div className="card shadow-sm border-0">
+        <div className="card-body">
+          {/* Title and Description */}
+          <div className="row gy-2">
+            <h4>מחשבון אחסנה</h4>
+            <p>שיטת החישוב הינה מחיר חודשי כפול מספר חודשי השכירות + הימים הנותרים כפול מחיר יומי (מחיר יומי = מחיר חודשי חלקי 30)</p>
           </div>
-        </div>
-        
-        <div className="col-xxl-3 col-lg-4 col-md-6">
-          <DatePicker
-            id="startDate"
-            name="startDate"
-            label="תאריך התחלה"
-            value={startDateState.value}
-            onChange={handleStartDateChange}
-            error={startDateState.error}
-            required
-          />
-        </div>
-        
-        <div className="col-xxl-3 col-lg-4 col-md-6">
-          <DatePicker
-            id="endDate"
-            name="endDate"
-            label="תאריך סיום כולל"
-            value={endDateState.value}
-            onChange={handleEndDateChange}
-            error={endDateState.error}
-            required
-          />
-        </div>
-      </div>
 
-      {/* Calculate Button */}
-      <div className="row gy-2 mt-3">
-        <div className="col-xxl-1 col-lg-2 col-md-3">
-          <button 
-            className="btn btn-primary" 
-            onClick={(evt) => calculate(evt)}
-          >
-            חשב
-          </button>
+          <HorizontalLine />
+
+          {/* Form Fields */}
+          <div className="row gy-3 mt-1">
+            <div className="col-xxl-3 col-lg-4 col-md-6">
+              <div>
+                <label htmlFor="priceInput" className="form-label">מחיר חודשי</label>
+                <input 
+                  type="number" 
+                  min="0" 
+                  max="3000" 
+                  className="form-control" 
+                  id="priceInput" 
+                  name="monthlyPrice"
+                  value={monthlyPriceState}
+                  onChange={e => {
+                    setMonthlyPriceState(e.target.value)
+                  }}
+                />
+              </div>
+            </div>
+            
+            <div className="col-xxl-3 col-lg-4 col-md-6">
+              <DatePicker
+                id="startDate"
+                name="startDate"
+                label="תאריך התחלה"
+                value={startDateState.value}
+                onChange={handleStartDateChange}
+                error={startDateState.error}
+                required
+              />
+            </div>
+            
+            <div className="col-xxl-3 col-lg-4 col-md-6">
+              <DatePicker
+                id="endDate"
+                name="endDate"
+                label="תאריך סיום כולל"
+                value={endDateState.value}
+                onChange={handleEndDateChange}
+                error={endDateState.error}
+                required
+              />
+            </div>
+          </div>
+
+          {/* Calculate Button */}
+          <div className="row gy-2 mt-4">
+            <div className="col-xxl-1 col-lg-2 col-md-3">
+              <button 
+                className="btn btn-primary" 
+                onClick={(evt) => calculate(evt)}
+              >
+                חשב
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

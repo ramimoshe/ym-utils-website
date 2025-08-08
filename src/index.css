@@ -18,7 +18,7 @@
 
 html, body {
   height: 100%;
-  background-color: #ffffff;
+  background-color: #f4f7f6; /* A nice, soft gray */
   color: #212529;
   direction: rtl;
   text-align: right;
@@ -28,6 +28,7 @@ html, body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: #f4f7f6; /* Ensure it covers the whole area */
 }
 
 /* Custom utilities */

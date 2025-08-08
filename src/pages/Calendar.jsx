@@ -21,16 +21,14 @@ const Calendar = () => {
       {/* Calendar Container */}
       <div className="row mt-4">
         <div className="col-12">
-          <div className="card border-0 shadow-sm">
-            <div className="card-body p-0">
-              <iframe 
-                title="לוח שנה"
-                src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=Asia%2FJerusalem&src=aXcuamV3aXNoI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&src=aXcuanVkYWlzbSNob2xpZGF5QGdyb3VwLnYuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&src=aXcuaXNsYW1pYyNob2xpZGF5QGdyb3VwLnYuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&color=%237986CB&color=%234285F4&color=%237CB342&ctz=Asia%2FJerusalem&hl=he"
-                width="100%"
-                height="700px"
-                style={{ border: 'none', borderRadius: '0.375rem' }}
-              />
-            </div>
+          <div className="overflow-hidden" style={{borderRadius: '0.375rem'}}>
+            <iframe 
+              title="לוח שנה"
+              src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=Asia%2FJerusalem&src=aXcuamV3aXNoI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&src=aXcuanVkYWlzbSNob2xpZGF5QGdyb3VwLnYuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&src=aXcuaXNsYW1pYyNob2xpZGF5QGdyb3VwLnYuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&color=%237986CB&color=%234285F4&color=%237CB342&ctz=Asia%2FJerusalem&hl=he"
+              width="100%"
+              height="700px"
+              style={{ border: 'none' }}
+            />
           </div>
         </div>
       </div>
