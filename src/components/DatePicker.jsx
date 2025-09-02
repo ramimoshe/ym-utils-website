@@ -12,14 +12,15 @@ const DatePicker = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [displayValue, setDisplayValue] = useState('')
+  const [currentDate, setCurrentDate] = useState(new Date()) // To control the displayed month/year
   const inputRef = useRef(null)
   const calendarRef = useRef(null)
 
   // Generate calendar days
   const generateCalendar = () => {
     const today = new Date()
-    const currentYear = today.getFullYear()
-    const currentMonth = today.getMonth()
+    const currentYear = currentDate.getFullYear()
+    const currentMonth = currentDate.getMonth()
     
     const firstDay = new Date(currentYear, currentMonth, 1)
     const lastDay = new Date(currentYear, currentMonth + 1, 0)
@@ -46,13 +47,24 @@ const DatePicker = ({
 
   const calendar = generateCalendar()
 
+  // Month navigation
+  const goToNextMonth = () => {
+    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1))
+  }
+
+  const goToPreviousMonth = () => {
+    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1))
+  }
+
   // Update display value when value changes
   useEffect(() => {
     if (value) {
       const date = new Date(value)
       setDisplayValue(date.toLocaleDateString('he-IL'))
+      setCurrentDate(date) // Set calendar to the selected date's month
     } else {
       setDisplayValue('')
+      setCurrentDate(new Date()) // Reset to today's month if value is cleared
     }
   }, [value])
 
@@ -108,8 +120,10 @@ const DatePicker = ({
           }}
         >
           {/* Calendar Header */}
-          <div className="text-center mb-3">
+          <div className="d-flex justify-content-between align-items-center mb-3">
+            <button type="button" className="btn btn-sm btn-outline-secondary" onClick={goToPreviousMonth}>&lt;</button>
             <h6 className="mb-0">{calendar.monthYear}</h6>
+            <button type="button" className="btn btn-sm btn-outline-secondary" onClick={goToNextMonth}>&gt;</button>
           </div>
           
           {/* Days of week header */}
