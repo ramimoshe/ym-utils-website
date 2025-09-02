@@ -128,3 +128,38 @@ input[type="date"] {
 input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
+
+/* react-datepicker RTL support */
+.date-picker-container .react-datepicker-wrapper {
+  width: 100%;
+}
+
+.date-picker-container .react-datepicker {
+  font-family: inherit;
+}
+
+.date-picker-container .react-datepicker__header {
+  direction: rtl;
+  background-color: #f0f0f0;
+}
+
+.date-picker-container .react-datepicker__current-month {
+  font-weight: bold;
+}
+
+.date-picker-container .react-datepicker__day-name,
+.date-picker-container .react-datepicker__day {
+  direction: rtl;
+  margin: 0.166rem;
+  width: 1.9rem;
+  line-height: 1.9rem;
+}
+
+.date-picker-container .react-datepicker__day--selected {
+  background-color: #0d6efd;
+  color: white;
+}
+
+.date-picker-container .react-datepicker__day:hover {
+  background-color: #e9ecef;
+}

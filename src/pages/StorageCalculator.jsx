@@ -4,7 +4,7 @@ import moment from 'moment'
 import HorizontalLine from '../components/HorizontalLine'
 import NotificationModal from '../components/NotificationModal'
 import ErrorModal from '../components/ErrorModal'
-import DatePicker from '../components/DatePicker'
+import CustomDatePicker from '../components/DatePicker'
 
 // Helper for empty required field state similar to your system
 const EMPTY_REQUIRED_FIELD_STATE = { value: '', isValid: false, error: '' }
@@ -149,7 +149,7 @@ const StorageCalculator = () => {
             </div>
             
             <div className="col-xxl-3 col-lg-4 col-md-6">
-              <DatePicker
+              <CustomDatePicker
                 id="startDate"
                 name="startDate"
                 label="תאריך התחלה"
@@ -161,7 +161,7 @@ const StorageCalculator = () => {
             </div>
             
             <div className="col-xxl-3 col-lg-4 col-md-6">
-              <DatePicker
+              <CustomDatePicker
                 id="endDate"
                 name="endDate"
                 label="תאריך סיום כולל"
