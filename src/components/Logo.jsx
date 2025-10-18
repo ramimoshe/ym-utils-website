@@ -1,4 +1,5 @@
 import React from 'react'
+import logoImage from '/LOGO_G2.png'
 
 const Logo = ({ className = "navbar-brand", size = "medium" }) => {
   // Size configurations
@@ -14,7 +15,7 @@ const Logo = ({ className = "navbar-brand", size = "medium" }) => {
   return (
     <div className={className}>
       <img 
-        src={import.meta.env.DEV ? "/LOGO_G2.png" : "/ym-utils-website/LOGO_G2.png"} 
+        src={logoImage} 
         alt="יואב הובלות ואחסנה" 
         style={logoStyle}
         className="img-fluid"

@@ -1,5 +1,6 @@
 import React from 'react'
 import Logo from './Logo'
+import logoImage from '/LOGO_G2.png'
 
 const NotificationModal = ({ state, onCloseClick }) => {
   if (!state.show) return null
@@ -53,7 +54,7 @@ const NotificationModal = ({ state, onCloseClick }) => {
   const handlePrintQuote = () => {
     const printWindow = window.open('', '_blank')
     const currentDate = new Date().toLocaleDateString('he-IL')
-    const logoUrl = import.meta.env.DEV ? "/LOGO_G2.png" : "/ym-utils-website/LOGO_G2.png"
+    const logoUrl = logoImage
     
     printWindow.document.write(`
       <!DOCTYPE html>
