@@ -53,6 +53,7 @@ const NotificationModal = ({ state, onCloseClick }) => {
   const handlePrintQuote = () => {
     const printWindow = window.open('', '_blank')
     const currentDate = new Date().toLocaleDateString('he-IL')
+    const logoUrl = `${window.location.origin}${import.meta.env.BASE_URL}LOGO_G2.png`
     
     printWindow.document.write(`
       <!DOCTYPE html>
@@ -232,7 +233,7 @@ const NotificationModal = ({ state, onCloseClick }) => {
       </head>
       <body>
         <div class="header">
-          <img src="/LOGO_G2.png" alt="יואב הובלות ואחסנה" class="logo">
+          <img src="${logoUrl}" alt="יואב הובלות ואחסנה" class="logo">
           <div class="company-info">
             מתמחים בשירותי הובלות ואחסנה מקצועיים
           </div>
