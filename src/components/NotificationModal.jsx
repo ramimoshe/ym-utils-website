@@ -53,7 +53,7 @@ const NotificationModal = ({ state, onCloseClick }) => {
   const handlePrintQuote = () => {
     const printWindow = window.open('', '_blank')
     const currentDate = new Date().toLocaleDateString('he-IL')
-    const logoUrl = `${window.location.origin}${import.meta.env.BASE_URL}LOGO_G2.png`
+    const logoUrl = import.meta.env.DEV ? "/LOGO_G2.png" : "/ym-utils-website/LOGO_G2.png"
     
     printWindow.document.write(`
       <!DOCTYPE html>

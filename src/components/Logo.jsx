@@ -14,7 +14,7 @@ const Logo = ({ className = "navbar-brand", size = "medium" }) => {
   return (
     <div className={className}>
       <img 
-        src={`${import.meta.env.BASE_URL}LOGO_G2.png`} 
+        src={import.meta.env.DEV ? "/LOGO_G2.png" : "/ym-utils-website/LOGO_G2.png"} 
         alt="יואב הובלות ואחסנה" 
         style={logoStyle}
         className="img-fluid"
