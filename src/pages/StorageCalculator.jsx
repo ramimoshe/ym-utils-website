@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
 import HorizontalLine from '../components/HorizontalLine'
@@ -10,18 +10,26 @@ import CustomDatePicker from '../components/DatePicker'
 const EMPTY_REQUIRED_FIELD_STATE = { value: '', isValid: false, error: '' }
 
 const StorageCalculator = () => {
+  const [customerNameState, setCustomerNameState] = useState('')
   const [monthlyPriceState, setMonthlyPriceState] = useState('')
   const [startDateState, setStartDateState] = useState(EMPTY_REQUIRED_FIELD_STATE)
   const [endDateState, setEndDateState] = useState(EMPTY_REQUIRED_FIELD_STATE)
-  const [calculationResult, setCalculationResult] = useState({ show: false, header: '', text: '' })
+  const [calculationResult, setCalculationResult] = useState({ 
+    show: false, 
+    header: '', 
+    methodText: '',
+    summaryText: '',
+    customerName: '',
+    entryDate: '', 
+    exitDate: '', 
+    monthlyPrice: '',
+    totalAmount: 0
+  })
   const [errorState, setErrorState] = useState({ show: false, header: '', text: '' })
 
-  useEffect(() => {
-    // Any initialization logic can go here
-  }, [])
 
   const calculate = (evt) => {
-    if (!startDateState.value || !endDateState.value || !monthlyPriceState || monthlyPriceState === 0) {
+    if (!customerNameState.trim() || !startDateState.value || !endDateState.value || !monthlyPriceState || monthlyPriceState === 0) {
       setErrorState({
         show: true,
         header: 'שגיאה',
@@ -57,31 +65,45 @@ const StorageCalculator = () => {
     const remainingDays = date2.diff(date1.clone().add(months, 'months'), 'days')
 
     const monthlyPrice = Number(monthlyPriceState)
-    const totalPrice2 = (months * monthlyPrice) + (remainingDays * monthlyPrice / 30)
     const totalPrice = Math.floor((months * monthlyPrice) + (remainingDays * monthlyPrice / 30))
 
-    let message = 'יואב הובלות ואחסנה\n'
-    message += 'עלות אחסנה\n\n'
-    message += '--------------------------------------------\n'
-    message += 'שיטת חישוב:\n'
-    message += 'מחיר חודשי כפול מספר חודשי השכירות + \n'
-    message += 'הימים הנותרים כפול מחיר יומי.\n\n'
-    message += '* מחיר יומי = מחיר חודשי חלקי 30\n'
-    message += '--------------------------------------------\n'
-    message += 'כמות חודשים: ' + months + '\n'
-    message += 'כמות ימים: ' + remainingDays + '\n'
-    message += 'מחיר סופי: ' + totalPrice + ' שקל'
-
+    // Split into two sections
+    const methodMessage = '<strong>📊 שיטת חישוב:</strong>'
+      + '\n• מחיר חודשי × מספר חודשי השכירות'
+      + '\n• ימים נותרים × מחיר יומי'
+      + '\n• סה"כ = חודשים + ימים'
+    
+    const summaryMessage = '<strong>💰 סיכום עלויות:</strong>'
+      + '\n📝  מחיר חודשי: ' + monthlyPrice + ' ₪'
+      + '\n🗓️  כמות חודשים: ' + months + ' חודש' + (months !== 1 ? 'ים' : '')
+      + '\n📅  כמות ימים: ' + remainingDays + ' ימים'
+    
     // Set the calculation result to be shown with the calculated message
     setCalculationResult({
       show: true,
-      header: 'פירוט עלויות',
-      text: message
+      header: 'חשבונית לתשלום',
+      methodText: methodMessage,
+      summaryText: summaryMessage,
+      customerName: customerNameState.trim(),
+      entryDate: startDateState.value,
+      exitDate: endDateState.value,
+      monthlyPrice: monthlyPriceState,
+      totalAmount: totalPrice
     })
   }
 
   const handlePostCalculate = () => {
-    setCalculationResult({ show: false, header: '', text: '' })
+    setCalculationResult({ 
+      show: false, 
+      header: '', 
+      methodText: '',
+      summaryText: '',
+      customerName: '',
+      entryDate: '', 
+      exitDate: '', 
+      monthlyPrice: '',
+      totalAmount: 0
+    })
   }
 
   const handleErrorClose = () => {
@@ -122,14 +144,30 @@ const StorageCalculator = () => {
         <div className="card-body">
           {/* Title and Description */}
           <div className="row gy-2">
-            <h4>מחשבון אחסנה</h4>
-            <p>שיטת החישוב הינה מחיר חודשי כפול מספר חודשי השכירות + הימים הנותרים כפול מחיר יומי (מחיר יומי = מחיר חודשי חלקי 30)</p>
+            <h4>חשבונית שירותי אחסנה</h4>
           </div>
 
           <HorizontalLine />
 
           {/* Form Fields */}
           <div className="row gy-3 mt-1">
+            <div className="col-xxl-3 col-lg-4 col-md-6">
+              <div>
+                <label htmlFor="customerNameInput" className="form-label">שם הלקוח</label>
+                <input 
+                  type="text" 
+                  className="form-control" 
+                  id="customerNameInput" 
+                  name="customerName"
+                  value={customerNameState}
+                  placeholder="הכנס שם הלקוח"
+                  onChange={e => {
+                    setCustomerNameState(e.target.value)
+                  }}
+                />
+              </div>
+            </div>
+            
             <div className="col-xxl-3 col-lg-4 col-md-6">
               <div>
                 <label htmlFor="priceInput" className="form-label">מחיר חודשי</label>
